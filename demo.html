@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The identification problem, live - Daniel Ketterer</title>
+<meta name="description" content="An interactive simulation from the f research program: a latent common cause and coupled mutual growth produce the same cross-sectional signature. Perturbations tell them apart." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="5" r="3.4" fill="%23A3312A"/><circle cx="26" cy="12" r="2.8" fill="%23A3312A"/><circle cx="23" cy="24" r="2.6" fill="%23A3312A"/><circle cx="9" cy="24" r="2.9" fill="%23A3312A"/><circle cx="5" cy="12" r="2.4" fill="%23A3312A"/><path d="M16 5 26 12M16 5 23 24M16 5 9 24M16 5 5 12M26 12 23 24M26 12 9 24M26 12 5 12M23 24 9 24M23 24 5 12M9 24 5 12" stroke="%2329527A" stroke-width="0.8" fill="none"/></svg>' />
+<link rel="stylesheet" href="main.css" />
+<style>
+.demo-header nav ul { gap: 1.2rem; }
+.demo-hero { padding: 3.2rem 0 2.4rem; }
+.demo-hero .lead { max-width: 46rem; }
+
+.controls {
+  background: #FFFFFF;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem 2.2rem;
+  align-items: center;
+  margin-bottom: 1.4rem;
+}
+.control-group { display: flex; align-items: center; gap: .7rem; }
+.control-group label, .seg-label {
+  font-family: var(--mono);
+  font-size: .74rem;
+  letter-spacing: .05em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.seg { display: inline-flex; border: 1.5px solid var(--ink); border-radius: 3px; overflow: hidden; }
+.seg button {
+  font-family: var(--mono); font-size: .78rem;
+  padding: .45rem .9rem; border: 0; background: transparent;
+  color: var(--ink); cursor: pointer;
+}
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+input[type="range"] { accent-color: var(--red); width: 130px; }
+.ctl-val { font-family: var(--mono); font-size: .78rem; min-width: 2.6em; }
+.ctl-btn {
+  font-family: var(--mono); font-size: .76rem;
+  padding: .45rem .8rem; cursor: pointer;
+  background: transparent; color: var(--ink);
+  border: 1.5px solid var(--ink); border-radius: 3px;
+}
+.ctl-btn:hover { border-color: var(--red); color: var(--red); }
+
+.panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 1.4rem;
+  align-items: stretch;
+}
+.panel {
+  background: #FFFFFF;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  padding: 1.1rem 1.3rem 1rem;
+  display: flex; flex-direction: column;
+}
+.panel h3 { font-size: 1.05rem; margin-bottom: .2rem; }
+.panel .panel-sub { font-family: var(--mono); font-size: .72rem; color: var(--ink-soft); margin-bottom: .8rem; }
+.panel canvas { width: 100%; display: block; }
+
+.legend { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .9rem; }
+.chip {
+  font-family: var(--mono); font-size: .72rem;
+  display: inline-flex; align-items: center; gap: .45rem;
+  padding: .32rem .6rem; cursor: pointer;
+  background: transparent; border: 1px solid var(--rule); border-radius: 3px;
+  color: var(--ink);
+}
+.chip:hover { border-color: var(--red); }
+.chip .dot { width: .62em; height: .62em; border-radius: 50%; display: inline-block; }
+.legend-hint { font-family: var(--mono); font-size: .7rem; color: var(--ink-soft); margin-top: .55rem; }
+
+.readout {
+  font-family: var(--mono); font-size: .76rem;
+  margin-top: .9rem; padding-top: .7rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-soft); line-height: 1.6;
+}
+.readout strong { color: var(--red); font-weight: 500; }
+
+.notice { margin-top: 3rem; max-width: 46rem; }
+.notice h2 { font-size: 1.4rem; }
+.notice ol { margin-left: 1.2rem; }
+.notice li { margin-bottom: .8rem; }
+.notice li::marker { font-family: var(--mono); color: var(--red); }
+
+.methodnote {
+  margin-top: 2.4rem;
+  font-family: var(--mono);
+  font-size: .74rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--rule);
+  padding-top: .9rem;
+  max-width: 46rem;
+}
+
+@media (max-width: 900px) {
+  .panels { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#sim">Skip to content</a>
+
+<header class="site-header demo-header">
+  <div class="container header-row">
+    <a class="logo" href="index.html">D.&thinsp;T.&thinsp;Ketterer</a>
+    <nav aria-label="Demo navigation">
+      <ul>
+        <li><a href="index.html">&larr; Portfolio</a></li>
+        <li><a href="toward_f.pdf" target="_blank" rel="noopener">Paper (PDF)</a></li>
+        <li><a href="https://github.com/DanielKetterer/Flourishing" target="_blank" rel="noopener">Code</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero demo-hero">
+  <div class="container">
+    <p class="kicker">Interactive &middot; from the f research program</p>
+    <h1 style="font-size:clamp(2rem,4.5vw,2.9rem)">The identification problem, live</h1>
+    <p class="lead">Wellbeing domains correlate positively everywhere they are measured. Two very different causal stories can explain that: a latent common cause driving every domain, or the domains boosting each other directly with no common cause at all. Below, both processes run live over a simulated population. Watch them settle into the same cross-sectional signature - then use shocks to tell them apart.</p>
+  </div>
+</section>
+
+<section id="sim" class="section" style="padding-top:2.2rem">
+  <div class="container">
+
+    <div class="controls" role="group" aria-label="Simulation controls">
+      <div class="control-group">
+        <span class="seg-label">process</span>
+        <div class="seg" role="group" aria-label="Data-generating process">
+          <button id="modeMut" aria-pressed="true">Mutualism</button>
+          <button id="modeLat" aria-pressed="false">Latent factor</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <label for="cSlider" id="cLabel">coupling c</label>
+        <input type="range" id="cSlider" min="0" max="0.60" step="0.01" value="0.55" />
+        <span class="ctl-val" id="cVal">0.55</span>
+      </div>
+      <div class="control-group">
+        <label for="nSlider">noise &sigma;</label>
+        <input type="range" id="nSlider" min="0" max="0.08" step="0.005" value="0.03" />
+        <span class="ctl-val" id="nVal">0.030</span>
+      </div>
+      <div class="control-group">
+        <button class="ctl-btn" id="resetBtn">Reset population</button>
+        <button class="ctl-btn" id="pauseBtn" aria-pressed="false">Pause</button>
+      </div>
+    </div>
+
+    <div class="panels">
+      <div class="panel">
+        <h3>One simulated life</h3>
+        <p class="panel-sub">six domain levels of individual #1, evolving in time</p>
+        <canvas id="trajCanvas" height="300" aria-label="Line chart of six domain trajectories over time"></canvas>
+        <div class="legend" id="legend"></div>
+        <p class="legend-hint">click a domain to shock it (&times;0.25). compare Env. Mastery, a coupling hub, against Autonomy, the most self-sustaining domain.</p>
+        <p class="readout" id="shockReadout">no shock applied yet.</p>
+      </div>
+      <div class="panel">
+        <h3>The cross-section</h3>
+        <p class="panel-sub">pairwise correlations across 120 simulated individuals</p>
+        <canvas id="corrCanvas" height="300" aria-label="Six by six correlation heatmap"></canvas>
+        <p class="readout" id="corrReadout"></p>
+      </div>
+    </div>
+
+    <div class="notice">
+      <h2><span class="smark">&sect;</span> What to notice</h2>
+      <ol>
+        <li><strong>Same signature.</strong> Both processes settle to all-positive correlations with one dominant axis. A snapshot of the population cannot tell you which world you are in.</li>
+        <li><strong>No hidden variable required.</strong> Under mutualism, drag coupling to zero and the manifold dissolves. Nothing latent was holding it up - the structure was the coupling.</li>
+        <li><strong>Shocks discriminate.</strong> Under mutualism, a shock to a hub drags the other domains down with it, while a shock to Autonomy barely transmits. Under the latent factor, shocks never propagate between domains at all. Perturbations over time, not snapshots, resolve the question - which is why the planned dissertation work is longitudinal.</li>
+      </ol>
+    </div>
+
+    <p class="methodnote">method note: illustrative dynamics, not the fitted model. Mutualism mode integrates a generalized Lotka-Volterra system (RK4, multiplicative noise) with qualitative couplings chosen to mirror the asymmetries estimated in the paper - Self-Acceptance most coupling-dependent, Autonomy most self-sustaining - not the Lyapunov-calibrated Jacobian. Latent mode relaxes each domain toward a target set by a person-level factor g with fixed loadings. Correlations are computed on log levels across 120 simulated individuals with heterogeneous capacities. Full treatment: <a href="toward_f.pdf" target="_blank" rel="noopener">Toward f (PDF)</a>.</p>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Daniel Ketterer &middot; Dayton, Ohio &middot; 2026</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- model constants ----------
+  var DOMS = ["Self-Acceptance", "Env. Mastery", "Personal Growth", "Positive Relations", "Purpose in Life", "Autonomy"];
+  var ABBR = ["SA", "EM", "PG", "PR", "PL", "AU"];
+  var COLORS = ["#A3312A", "#29527A", "#B07C2A", "#2E7D6B", "#6B4F8C", "#4A4A44"];
+  var N = 6, P = 120, DT = 0.02, SUBSTEPS = 2;
+  // W[i][j] = influence of domain j on domain i (row = receiver).
+  // Qualitative: EM strong sender (hub), SA strong receiver, AU weakly coupled both ways.
+  var W = [
+    [0, .95, .50, .85, .40, .12],
+    [.50, 0, .50, .55, .40, .14],
+    [.45, .75, 0, .50, .55, .12],
+    [.60, .70, .40, 0, .35, .10],
+    [.40, .65, .60, .50, 0, .12],
+    [.15, .18, .18, .15, .15, 0]
+  ].map(function (row) { return row.map(function (v) { return v / 2.2; }); });
+  var LAM = [0.75, 0.70, 0.68, 0.72, 0.45, 0.50]; // latent loadings
+
+  // ---------- state ----------
+  var mode = "mut";           // "mut" | "lat"
+  var c = 0.55;               // coupling (mut) / loading strength source (lat: s = 0.85 * c)
+  var sigma = 0.03;
+  var paused = false;
+  var x = [], K = [], g = [], eps = [], tgt = [];
+  var histLen = 560, hist = [];   // focal trajectories, ring buffer
+  var histCount = 0;
+  var shock = null;               // {idx, pre[], minOthers[], framesLeft}
+  var corr = identity6();
+
+  function randn() {
+    var u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+  function identity6() {
+    var m = [];
+    for (var i = 0; i < N; i++) { m.push([]); for (var j = 0; j < N; j++) m[i].push(i === j ? 1 : 0); }
+    return m;
+  }
+
+  function initPopulation() {
+    x = []; K = []; g = []; eps = []; tgt = [];
+    for (var p = 0; p < P; p++) {
+      var Kp = [], xp = [], ep = [];
+      for (var i = 0; i < N; i++) {
+        Kp.push(Math.exp(0.30 * randn()));
+        ep.push(0.24 * randn());
+      }
+      for (i = 0; i < N; i++) xp.push(Kp[i] * (0.4 + 0.2 * Math.random()));
+      K.push(Kp); x.push(xp); eps.push(ep); g.push(randn());
+    }
+    rebuildTargets();
+    hist = []; histCount = 0; shock = null;
+    updateShockReadout();
+  }
+
+  function rebuildTargets() {
+    var s = 0.85 * c;
+    tgt = [];
+    for (var p = 0; p < P; p++) {
+      var tp = [];
+      for (var i = 0; i < N; i++) tp.push(Math.exp(LAM[i] * g[p] * s + eps[p][i]));
+      tgt.push(tp);
+    }
+  }
+
+  // ---------- dynamics ----------
+  function derivMut(xp, Kp, out) {
+    for (var i = 0; i < N; i++) {
+      var coup = 0;
+      for (var j = 0; j < N; j++) coup += W[i][j] * xp[j];
+      out[i] = xp[i] * (1 - xp[i] / Kp[i]) + c * xp[i] * coup;
+    }
+  }
+  var k1 = new Array(N), k2 = new Array(N), k3 = new Array(N), k4 = new Array(N), tmp = new Array(N);
+
+  function stepPerson(p) {
+    var xp = x[p], Kp = K[p], i;
+    if (mode === "mut") {
+      derivMut(xp, Kp, k1);
+      for (i = 0; i < N; i++) tmp[i] = xp[i] + DT / 2 * k1[i];
+      derivMut(tmp, Kp, k2);
+      for (i = 0; i < N; i++) tmp[i] = xp[i] + DT / 2 * k2[i];
+      derivMut(tmp, Kp, k3);
+      for (i = 0; i < N; i++) tmp[i] = xp[i] + DT * k3[i];
+      derivMut(tmp, Kp, k4);
+      for (i = 0; i < N; i++) {
+        xp[i] += DT / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]);
+        xp[i] += sigma * Math.sqrt(DT) * randn() * xp[i];
+        if (xp[i] < 1e-3) xp[i] = 1e-3; if (xp[i] > 50) xp[i] = 50;
+      }
+    } else {
+      var tp = tgt[p];
+      for (i = 0; i < N; i++) {
+        xp[i] += DT * 2.0 * (tp[i] - xp[i]);
+        xp[i] += sigma * Math.sqrt(DT) * randn() * xp[i];
+        if (xp[i] < 1e-3) xp[i] = 1e-3; if (xp[i] > 50) xp[i] = 50;
+      }
+    }
+  }
+
+  function stepAll() {
+    for (var s = 0; s < SUBSTEPS; s++) for (var p = 0; p < P; p++) stepPerson(p);
+    // focal history
+    var snap = x[0].slice();
+    hist.push(snap); histCount++;
+    if (hist.length > histLen) hist.shift();
+    // shock tracking
+    if (shock && shock.framesLeft > 0) {
+      for (var i = 0, o = 0; i < N; i++) {
+        if (i === shock.idx) continue;
+        var rel = (x[0][i] - shock.pre[i]) / shock.pre[i];
+        if (rel < shock.minOthers[o]) shock.minOthers[o] = rel;
+        o++;
+      }
+      shock.framesLeft--;
+      updateShockReadout();
+    }
+  }
+
+  function applyShock(idx) {
+    if (hist.length < 40) return;
+    var pre = [], m = 0, i, h;
+    for (i = 0; i < N; i++) {
+      m = 0;
+      for (h = hist.length - 30; h < hist.length; h++) m += hist[h][i];
+      pre.push(m / 30);
+    }
+    x[0][idx] *= 0.25;
+    shock = { idx: idx, pre: pre, minOthers: [0, 0, 0, 0, 0], framesLeft: 220 };
+    updateShockReadout();
+  }
+
+  function updateShockReadout() {
+    var el = document.getElementById("shockReadout");
+    if (!shock) { el.textContent = "no shock applied yet."; return; }
+    var mean = shock.minOthers.reduce(function (a, b) { return a + b; }, 0) / 5;
+    el.innerHTML = "shock to " + ABBR[shock.idx] + " (&times;0.25): mean dip in the other five domains so far <strong>" +
+      (mean * 100).toFixed(1) + "%</strong>" + (shock.framesLeft > 0 ? " &middot; tracking&hellip;" : " &middot; done. try the other one.");
+  }
+
+  // ---------- correlation ----------
+  function computeCorr() {
+    var L = [], p, i, j;
+    for (p = 0; p < P; p++) { L.push([]); for (i = 0; i < N; i++) L[p].push(Math.log(x[p][i])); }
+    var mean = [], sd = [];
+    for (i = 0; i < N; i++) {
+      var m = 0; for (p = 0; p < P; p++) m += L[p][i]; m /= P;
+      var v = 0; for (p = 0; p < P; p++) v += (L[p][i] - m) * (L[p][i] - m); v /= (P - 1);
+      mean.push(m); sd.push(Math.sqrt(v) || 1e-9);
+    }
+    for (i = 0; i < N; i++) for (j = 0; j < N; j++) {
+      if (i === j) { corr[i][j] = 1; continue; }
+      var cv = 0;
+      for (p = 0; p < P; p++) cv += (L[p][i] - mean[i]) * (L[p][j] - mean[j]);
+      corr[i][j] = cv / (P - 1) / (sd[i] * sd[j]);
+    }
+    var off = 0, pos = 0, n = 0;
+    for (i = 0; i < N; i++) for (j = i + 1; j < N; j++) { off += corr[i][j]; if (corr[i][j] > 0) pos++; n++; }
+    document.getElementById("corrReadout").innerHTML =
+      "mean off-diagonal r = <strong>" + (off / n).toFixed(2) + "</strong> &middot; positive pairs: " + pos + "/" + n;
+  }
+
+  // ---------- rendering ----------
+  function setupCanvas(cv) {
+    var dpr = window.devicePixelRatio || 1;
+    var rect = cv.getBoundingClientRect();
+    cv.width = Math.round(rect.width * dpr);
+    cv.height = Math.round((cv.getAttribute("height") | 0) * dpr);
+    cv.style.height = cv.getAttribute("height") + "px";
+    var ctx = cv.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return ctx;
+  }
+  var trajCv = document.getElementById("trajCanvas");
+  var corrCv = document.getElementById("corrCanvas");
+  var trajCtx = setupCanvas(trajCv);
+  var corrCtx = setupCanvas(corrCv);
+  window.addEventListener("resize", function () {
+    trajCtx = setupCanvas(trajCv); corrCtx = setupCanvas(corrCv);
+  });
+
+  function drawTraj() {
+    var w = trajCv.getBoundingClientRect().width, h = 300;
+    trajCtx.clearRect(0, 0, w, h);
+    if (hist.length < 2) return;
+    var ymax = 0.1, hh, i;
+    for (hh = 0; hh < hist.length; hh++) for (i = 0; i < N; i++) if (hist[hh][i] > ymax) ymax = hist[hh][i];
+    ymax *= 1.08;
+    // gridlines
+    trajCtx.strokeStyle = "rgba(41,82,122,.10)"; trajCtx.lineWidth = 1;
+    for (i = 1; i < 5; i++) {
+      trajCtx.beginPath(); trajCtx.moveTo(0, h * i / 5); trajCtx.lineTo(w, h * i / 5); trajCtx.stroke();
+    }
+    for (i = 0; i < N; i++) {
+      trajCtx.strokeStyle = COLORS[i]; trajCtx.lineWidth = 1.6; trajCtx.beginPath();
+      for (hh = 0; hh < hist.length; hh++) {
+        var px = hh / (histLen - 1) * w;
+        var py = h - (hist[hh][i] / ymax) * h;
+        if (hh === 0) trajCtx.moveTo(px, py); else trajCtx.lineTo(px, py);
+      }
+      trajCtx.stroke();
+    }
+  }
+
+  function heatColor(r) {
+    if (r >= 0) {
+      var t = Math.min(r, 1);
+      return "rgb(" + Math.round(255 - t * (255 - 27)) + "," + Math.round(255 - t * (255 - 110)) + "," + Math.round(255 - t * (255 - 67)) + ")";
+    }
+    var u = Math.min(-r, 1);
+    return "rgb(" + Math.round(255 - u * (255 - 179)) + "," + Math.round(255 - u * (255 - 56)) + "," + Math.round(255 - u * (255 - 46)) + ")";
+  }
+
+  function drawCorr() {
+    var w = corrCv.getBoundingClientRect().width, h = 300;
+    corrCtx.clearRect(0, 0, w, h);
+    var pad = 34, cw = (w - pad) / N, ch = (h - pad) / N, i, j;
+    corrCtx.font = "10px 'IBM Plex Mono', monospace";
+    for (i = 0; i < N; i++) for (j = 0; j < N; j++) {
+      var cx = pad + j * cw, cy = i * ch;
+      corrCtx.fillStyle = heatColor(corr[i][j]);
+      corrCtx.fillRect(cx, cy, cw - 1.5, ch - 1.5);
+      corrCtx.fillStyle = corr[i][j] > 0.62 ? "#FFFFFF" : "#1C2226";
+      corrCtx.textAlign = "center"; corrCtx.textBaseline = "middle";
+      corrCtx.fillText(corr[i][j].toFixed(2), cx + cw / 2, cy + ch / 2);
+    }
+    corrCtx.fillStyle = "#46504F"; corrCtx.textAlign = "right";
+    for (i = 0; i < N; i++) corrCtx.fillText(ABBR[i], pad - 6, i * ch + ch / 2);
+    corrCtx.textAlign = "center";
+    for (j = 0; j < N; j++) corrCtx.fillText(ABBR[j], pad + j * cw + cw / 2, h - pad / 2);
+  }
+
+  // ---------- UI ----------
+  var legend = document.getElementById("legend");
+  DOMS.forEach(function (d, i) {
+    var b = document.createElement("button");
+    b.className = "chip";
+    b.type = "button";
+    b.title = "Shock " + d;
+    b.innerHTML = '<span class="dot" style="background:' + COLORS[i] + '"></span>' + d;
+    b.addEventListener("click", function () { applyShock(i); });
+    legend.appendChild(b);
+  });
+
+  var cSlider = document.getElementById("cSlider"), cVal = document.getElementById("cVal"), cLabel = document.getElementById("cLabel");
+  var nSlider = document.getElementById("nSlider"), nVal = document.getElementById("nVal");
+  cSlider.addEventListener("input", function () {
+    c = parseFloat(cSlider.value); cVal.textContent = c.toFixed(2);
+    if (mode === "lat") rebuildTargets();
+  });
+  nSlider.addEventListener("input", function () {
+    sigma = parseFloat(nSlider.value); nVal.textContent = sigma.toFixed(3);
+  });
+
+  var modeMut = document.getElementById("modeMut"), modeLat = document.getElementById("modeLat");
+  function setMode(m) {
+    mode = m;
+    modeMut.setAttribute("aria-pressed", m === "mut" ? "true" : "false");
+    modeLat.setAttribute("aria-pressed", m === "lat" ? "true" : "false");
+    cLabel.textContent = m === "mut" ? "coupling c" : "loading s";
+    initPopulation();
+  }
+  modeMut.addEventListener("click", function () { setMode("mut"); });
+  modeLat.addEventListener("click", function () { setMode("lat"); });
+
+  document.getElementById("resetBtn").addEventListener("click", initPopulation);
+  var pauseBtn = document.getElementById("pauseBtn");
+  pauseBtn.addEventListener("click", function () {
+    paused = !paused;
+    pauseBtn.textContent = paused ? "Run" : "Pause";
+    pauseBtn.setAttribute("aria-pressed", paused ? "true" : "false");
+  });
+
+  // ---------- loop ----------
+  var frame = 0;
+  function loop() {
+    if (!paused) {
+      stepAll();
+      drawTraj();
+      if (frame % 6 === 0) { computeCorr(); drawCorr(); }
+      frame++;
+    }
+    requestAnimationFrame(loop);
+  }
+  initPopulation();
+  computeCorr(); drawCorr();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

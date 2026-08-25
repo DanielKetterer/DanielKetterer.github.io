@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Daniel Ketterer - Mathematician, Researcher, Writer</title>
+<meta name="description" content="Mathematician (M.S.) and full-stack developer in Dayton, Ohio, with defense R&amp;D experience and an inactive Top Secret clearance. Systems-level software, applied mathematics, and research on the measurement of human flourishing." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><circle cx="16" cy="5" r="3.4" fill="%23A3312A"/><circle cx="26" cy="12" r="2.8" fill="%23A3312A"/><circle cx="23" cy="24" r="2.6" fill="%23A3312A"/><circle cx="9" cy="24" r="2.9" fill="%23A3312A"/><circle cx="5" cy="12" r="2.4" fill="%23A3312A"/><path d="M16 5 26 12M16 5 23 24M16 5 9 24M16 5 5 12M26 12 23 24M26 12 9 24M26 12 5 12M23 24 9 24M23 24 5 12M9 24 5 12" stroke="%2329527A" stroke-width="0.8" fill="none"/></svg>' />
+<meta property="og:title" content="Daniel Ketterer - Mathematician, Researcher, Writer" />
+<meta property="og:description" content="Systems-level software, applied mathematics, and research on the measurement of human flourishing." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="portrait.jpg" />
+<link rel="stylesheet" href="main.css" />
+</head>
+<body>
+<a class="skip-link" href="#about">Skip to content</a>
+
+<header class="site-header">
+  <div class="container header-row">
+    <a class="logo" href="#top">D.&thinsp;T.&thinsp;Ketterer</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav id="site-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <p class="kicker">Dayton, Ohio</p>
+      <h1 id="hero-title">Daniel Ketterer</h1>
+      <p class="tagline">Mathematician &middot; Researcher &middot; Writer</p>
+      <p class="lead">Mathematician (M.S.) and full-stack developer with defense R&amp;D experience and an inactive Top Secret clearance. I build software at the systems level and research the quantitative measurement of human flourishing.</p>
+      <div class="hero-cta">
+        <a href="#experience" class="btn btn-primary">View experience</a>
+        <a href="resume.pdf" class="btn btn-outline" target="_blank" rel="noopener">Resume (PDF)</a>
+      </div>
+    </div>
+    <figure class="hero-plate">
+      <a href="mutualism_figure.png" target="_blank" rel="noopener" aria-label="Open full-size figure in a new tab">
+        <img src="mutualism_figure.png" alt="Three-panel figure titled 'Two causal structures, one statistical signature': Spearman's latent-factor model, the van der Maas mutualism network, and the observed Holzinger and Swineford correlation matrix that both models reproduce." width="1800" height="901" />
+      </a>
+      <figcaption>fig. 1 &nbsp;&nbsp;the identification problem driving the f research: a latent common cause and coupled mutual growth produce the same cross-sectional signature. click to enlarge.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <div class="container">
+    <h2><span class="smark">&sect;1</span> About</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I am a mathematician and software developer in Dayton, Ohio. My background spans systems-level engineering (Linux, C/C++, static analysis), enterprise integration security (OAuth 2.0, Salesforce, Azure), and applied mathematics (optimization, machine learning, control). Much of that work has been on federal systems: legacy Army financial software at Accenture Federal Services, Department of Education data pipelines, and graduate research on autonomous UAV control with the Air Force Research Laboratory. I held a Top Secret clearance for that work; it is currently inactive.</p>
+        <p>Alongside the engineering, I run an independent research program on the quantitative measurement of human flourishing. The core of it is "f" - a general-factor construct, in the tradition of Spearman's g, modeling flourishing as coupling strength across the domains of a life. The work so far includes a bifactor measurement case across six instrument families, longitudinal economic validation on the MIDUS panel, and a pre-registered analysis plan for the Global Flourishing Study.</p>
+        <p>What ties the two together is a habit of translating theoretical structure into working code, and working systems back into theory.</p>
+      </div>
+      <figure class="about-photo">
+        <img src="portrait.jpg" alt="Portrait of Daniel Ketterer" width="800" height="1120" loading="lazy" />
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="section section-alt">
+  <div class="container">
+    <h2><span class="smark">&sect;2</span> Selected work</h2>
+
+    <article class="featured-card reveal">
+      <p class="project-meta">2026 &ndash; present &middot; Independent research</p>
+      <h3>Toward f: A General Factor of Human Flourishing</h3>
+      <p>Measures of wellbeing - purpose, relationships, competence, self-regard - correlate positively everywhere they are measured. This project asks whether a single general factor, f, underlies that pattern, the way Spearman's g underlies cognitive ability. The paper establishes f as psychometrically coherent across 17 indicators from six independently designed instrument families (&omega;<sub>h</sub> = 0.893), shows that it predicts income and employment nine years out on the MIDUS panel beyond demographics and pathology measures, and develops a mutualism dynamical-systems account of what generates the structure. A pre-registered Global Flourishing Study analysis plan and a planned three-paper dissertation extend the work toward policy.</p>
+      <div class="project-links">
+        <a href="demo.html">Live demo &rarr;</a>
+        <a href="toward_f.pdf" target="_blank" rel="noopener">Read the paper &rarr;</a>
+        <a href="https://osf.io/2zfpc/" target="_blank" rel="noopener">Pre-registration (OSF) &rarr;</a>
+        <a href="https://github.com/DanielKetterer/Flourishing" target="_blank" rel="noopener">Code &rarr;</a>
+      </div>
+    </article>
+
+    <div class="projects-grid">
+      <article class="project-card reveal">
+        <h3>Call Trace Tool</h3>
+        <p class="project-meta">2016 &middot; Static analysis &middot; Accenture Federal Services</p>
+        <p>A static-analysis utility that recursively traces external calls through a large legacy SAP ABAP codebase (GFEBS, the Army's financial system) and builds the program call graph. Adopted on a second federal contract (DEAMS).</p>
+        <p class="project-note">Code lives on federal systems and is not public.</p>
+      </article>
+
+      <article class="project-card reveal">
+        <h3>SafePlate</h3>
+        <p class="project-meta">2023&ndash;2024 &middot; Full-stack application</p>
+        <p>A cross-platform, allergy-conscious restaurant finder: Flet (Python) UI, Flask backend, MySQL persistence, and Google Maps API integration, delivered end to end as principal developer.</p>
+      </article>
+
+      <article class="project-card reveal">
+        <h3>PracticalMath</h3>
+        <p class="project-meta">Open source &middot; Python &middot; Econometrics</p>
+        <p>An econometrics visual primer written for the math-literate, with every visualization generated from code, alongside data pipelines and applied analysis scripts for wellbeing data.</p>
+        <div class="project-links">
+          <a href="https://github.com/DanielKetterer/PracticalMath" target="_blank" rel="noopener">Repository &rarr;</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <h3>Stock Simulator</h3>
+        <p class="project-meta">Open source &middot; Python</p>
+        <p>Simulates how a portfolio's value evolves under different trading strategies - a small laboratory for comparing decision rules against market data.</p>
+        <div class="project-links">
+          <a href="https://github.com/DanielKetterer/Stock-Simulator" target="_blank" rel="noopener">Repository &rarr;</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <h3>Chess Analysis</h3>
+        <p class="project-meta">Open source &middot; Python</p>
+        <p>Tools for analyzing chess games and positions in Python - part of an ongoing study project in the game.</p>
+        <div class="project-links">
+          <a href="https://github.com/DanielKetterer/chess" target="_blank" rel="noopener">Repository &rarr;</a>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <h3>More on GitHub</h3>
+        <p class="project-meta">24 public repositories</p>
+        <p>Machine learning coursework and experiments, MATLAB scientific computation, word-representable graphs, simulators, and other working mathematics.</p>
+        <div class="project-links">
+          <a href="https://github.com/DanielKetterer" target="_blank" rel="noopener">All repositories &rarr;</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="section">
+  <div class="container">
+    <h2><span class="smark">&sect;3</span> Experience</h2>
+    <div class="xp-list">
+
+      <article class="xp-row reveal">
+        <p class="xp-dates">Feb 2025 &ndash; present</p>
+        <div class="xp-body">
+          <h3>Math Intelligence Engineer &middot; Mercor</h3>
+          <p>Applying advanced mathematics to evaluate and strengthen the mathematical reasoning of large language models. Remote.</p>
+        </div>
+      </article>
+
+      <article class="xp-row reveal">
+        <p class="xp-dates">Jan 2025 &ndash; Feb 2026</p>
+        <div class="xp-body">
+          <h3>IT Analyst &middot; McGohan Brabender</h3>
+          <p>Secured Salesforce-to-SharePoint/GitHub integrations with OAuth 2.0 (PKCE, refresh-token rotation), Connected Apps, and Azure Key Vault secret management. Built file-driven integration workflows with webhook reliability and end-to-end audit and alerting through Azure Log Analytics; developed Salesforce automations (Flows, Apex triggers, queueables, batch jobs) and optimized SOQL. Dayton, OH.</p>
+        </div>
+      </article>
+
+      <article class="xp-row reveal">
+        <p class="xp-dates">Sep 2023 &ndash; Sep 2024</p>
+        <div class="xp-body">
+          <h3>Principal Developer &middot; SafePlate</h3>
+          <p>Built a full-stack, cross-platform allergy-conscious restaurant finder: Flet (Python) UI, Flask backend, MySQL database, and Google Maps API integration, with persistent storage and API integration delivered end to end.</p>
+        </div>
+      </article>
+
+      <article class="xp-row reveal">
+        <p class="xp-dates">Jun 2022 &ndash; Apr 2023</p>
+        <div class="xp-body">
+          <h3>Quality Assurance Engineer &middot; PayTile</h3>
+          <p>Performance- and load-tested the PayTile API for 5,000 concurrent users with Redline13 and JMeter; built an automated test suite (Postman, Newman, GitHub Actions) for CI/CD and wrote TypeScript/Jest unit tests.</p>
+        </div>
+      </article>
+
+      <article class="xp-row reveal">
+        <p class="xp-dates">Sep 2019 &ndash; May 2022</p>
+        <div class="xp-body">
+          <h3>Graduate Researcher &middot; Wright State University / Air Force Research Laboratory</h3>
+          <p>Joint inference and control research with Dr. Luther Palmer: autonomous control strategies for military UAV surveillance in anti-access/area-denial (A2/AD) environments, implementing Ant Colony Optimization and applying CNNs, clustering, and reinforcement learning in MATLAB.</p>
+        </div>
+      </article>
+
+      <article class="xp-row reveal">
+        <p class="xp-dates">Mar 2016 &ndash; Jul 2017</p>
+        <div class="xp-body">
+          <h3>Federal System Developer Analyst &middot; Accenture Federal Services</h3>
+          <p>Maintained GFEBS, the Army's large legacy financial system, writing SAP ABAP to diagnose and repair defects. Built the Call Trace Tool, a static-analysis utility adopted on a second federal contract (DEAMS). U.S. Department of Defense.</p>
+        </div>
+      </article>
+
+      <article class="xp-row reveal">
+        <p class="xp-dates">Jun 2015 &ndash; Jan 2016</p>
+        <div class="xp-body">
+          <h3>Software Tester &middot; Accenture Federal Services</h3>
+          <p>Verified data consistency across databases with Linux shell and PostgreSQL, tracing data flow to identify high- and low-performing schools for a Department of Education reporting site.</p>
+        </div>
+      </article>
+
+    </div>
+    <p class="xp-footnote">Security clearance: Top Secret, U.S. Department of Defense (held 2016, inactive). Full detail in the <a href="resume.pdf" target="_blank" rel="noopener">resume (PDF)</a>.</p>
+  </div>
+</section>
+
+<section id="skills" class="section section-alt">
+  <div class="container">
+    <h2><span class="smark">&sect;4</span> Skills</h2>
+    <div class="skills-grid">
+      <div class="skills-category reveal">
+        <h3>Languages</h3>
+        <ul>
+          <li>Python</li>
+          <li>C++</li>
+          <li>TypeScript</li>
+          <li>SQL</li>
+          <li>MATLAB</li>
+          <li>Java</li>
+          <li>SAP ABAP</li>
+          <li>Apex</li>
+        </ul>
+      </div>
+      <div class="skills-category reveal">
+        <h3>Systems &amp; Security</h3>
+        <ul>
+          <li>Linux (shell, systems-level)</li>
+          <li>Static analysis / call-graph tracing</li>
+          <li>OAuth 2.0 / PKCE</li>
+          <li>Refresh-token rotation</li>
+          <li>Secret management (Azure Key Vault)</li>
+          <li>CI/CD (GitHub Actions)</li>
+        </ul>
+      </div>
+      <div class="skills-category reveal">
+        <h3>Frameworks &amp; Tools</h3>
+        <ul>
+          <li>Flask, Flet</li>
+          <li>Git / GitHub</li>
+          <li>PostgreSQL, MySQL</li>
+          <li>Postman / Newman</li>
+          <li>JMeter, Jest</li>
+          <li>Google Maps API</li>
+        </ul>
+      </div>
+      <div class="skills-category reveal">
+        <h3>ML &amp; Applied Math</h3>
+        <ul>
+          <li>CNNs</li>
+          <li>Clustering</li>
+          <li>Reinforcement learning</li>
+          <li>Ant colony optimization</li>
+          <li>Control theory</li>
+          <li>Psychometric factor models</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="section">
+  <div class="container">
+    <h2><span class="smark">&sect;5</span> Education</h2>
+    <div class="education-list">
+      <article class="education-entry reveal">
+        <h3>M.S., Mathematics</h3>
+        <p class="edu-meta">Wright State University, Dayton, OH &middot; May 2020</p>
+      </article>
+      <article class="education-entry reveal">
+        <h3>B.S., Mathematics, Magna Cum Laude</h3>
+        <p class="edu-meta">Schreiner University, Kerrville, TX &middot; May 2015 &middot; GPA 3.7</p>
+        <p><a href="undergraduate_thesis.pdf" target="_blank" rel="noopener">Undergraduate thesis (PDF) &rarr;</a></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section section-alt">
+  <div class="container">
+    <h2><span class="smark">&sect;6</span> Contact</h2>
+    <p class="contact-lead">I welcome correspondence on software, mathematics, and the measurement of flourishing - and I am open to interesting technical work.</p>
+    <p class="contact-links">
+      <a class="btn btn-primary" href="mailto:daniel.kette@gmail.com">daniel.kette@gmail.com</a>
+    </p>
+    <p class="contact-social">
+      <a href="https://github.com/DanielKetterer" target="_blank" rel="noopener">GitHub</a>
+      <span aria-hidden="true">&middot;</span>
+      <a href="https://www.linkedin.com/in/daniel-ketterer-math" target="_blank" rel="noopener">LinkedIn</a>
+      <span aria-hidden="true">&middot;</span>
+      <a href="https://osf.io/2zfpc/" target="_blank" rel="noopener">OSF</a>
+      <span aria-hidden="true">&middot;</span>
+      <a href="https://www.facebook.com/daniel.ketterer" target="_blank" rel="noopener">Facebook</a>
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>Daniel Ketterer &middot; Dayton, Ohio &middot; 2026</p>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
