@@ -166,6 +166,9 @@ h1 {
 .btn-outline { background: transparent; color: var(--ink); }
 .btn-outline:hover { border-color: var(--red); color: var(--red); text-decoration: none; }
 
+.btn-demo { background: var(--red); border-color: var(--red); color: #FFFFFF; }
+.btn-demo:hover { background: var(--ink); border-color: var(--ink); color: var(--paper); text-decoration: none; }
+
 .hero-plate {
   background: #FFFFFF;
   border: 1px solid var(--rule);
@@ -173,7 +176,16 @@ h1 {
   padding: 1.1rem 1.1rem .8rem;
   box-shadow: 8px 8px 0 0 var(--paper-alt), 8px 8px 0 1px var(--rule);
 }
-.hero-plate a { display: block; }
+.hero-plate .plate-link { display: block; position: relative; }
+.hero-plate .plate-link:hover img { opacity: .92; }
+.plate-badge {
+  position: absolute; top: .6rem; right: .6rem; z-index: 2;
+  font-family: var(--mono); font-size: .7rem; letter-spacing: .05em;
+  background: var(--red); color: #FFFFFF;
+  padding: .3rem .6rem; border-radius: 3px;
+}
+.hero-plate:hover { border-color: var(--red); }
+.hero-plate figcaption a { font-family: var(--mono); }
 .hero-plate img { width: 100%; height: auto; display: block; }
 .hero-plate figcaption {
   margin-top: .8rem;
